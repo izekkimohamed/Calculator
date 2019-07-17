@@ -3,14 +3,15 @@ const displayedNum = document.querySelector(".curr-op");
 const prevNum = document.querySelector(".prev-op");
 const opeartorContent = document.querySelector('.operator')
 const keys = document.querySelector(".numbers");
+let result;
+let operator ;
 keys.addEventListener("click", e => {
   if (e.target.matches("button")) {
     const key = e.target;
     const action = key.dataset.action;
     const keyContent = key.innerText;
     const displayContent = displayedNum.innerText;
-    let result;
-    let operator ;
+    
     if (!action) {
       if (displayContent === "0") {
         displayedNum.innerText = keyContent;
@@ -48,25 +49,22 @@ keys.addEventListener("click", e => {
 
       if (opeartorContent.innerText.includes("+")) {
         result = prevNumber + currNum;
-        displayedNum.innerText = result;
-        prevNum.innerText = "";
-        opeartorContent.innerText = "";
+        displayResult()
       } else if (opeartorContent.innerText.includes("-")) {
         result = prevNumber - currNum;
-        displayedNum.innerText = result;
-        prevNum.innerText = "";
-        opeartorContent.innerText = "";
+        displayResult()
       } else if (opeartorContent.innerText.includes("x")) {
         result = prevNumber * currNum;
-        displayedNum.innerText = result;
-        prevNum.innerText = "";
-        opeartorContent.innerText = "";
+        displayResult()
       } else if (opeartorContent.innerText.includes("÷")) {
         result = prevNumber / currNum;
-        displayedNum.innerText = result;
-        prevNum.innerText = "";
-        opeartorContent.innerText = "";
+        displayResult()
       }
     }
   }
 });
+function displayResult(){
+  displayedNum.innerText = result;
+  prevNum.innerText = "";
+  opeartorContent.innerText = "";
+}
