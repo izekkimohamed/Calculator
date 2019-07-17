@@ -1,22 +1,22 @@
 const calculator = document.querySelector(".container");
 const displayedNum = document.querySelector(".curr-op");
 const prevNum = document.querySelector(".prev-op");
-const opeartorContent = document.querySelector('.operator')
+const opeartor = document.querySelector('.operator')
 const keys = document.querySelector(".numbers");
 let result;
-let operator ;
+
 keys.addEventListener("click", e => {
   if (e.target.matches("button")) {
     const key = e.target;
     const action = key.dataset.action;
-    const keyContent = key.innerText;
-    const displayContent = displayedNum.innerText;
+    const keyContent = key.textContent;
+    const displayContent = displayedNum.textContent;
     
     if (!action) {
       if (displayContent === "0") {
-        displayedNum.innerText = keyContent;
+        displayedNum.textContent = keyContent;
       } else {
-        displayedNum.innerText += keyContent;
+        displayedNum.textContent += keyContent;
       }
     }
     if (
@@ -26,37 +26,38 @@ keys.addEventListener("click", e => {
       action === "multi" ||
       action === "reminder"
     ) {
-      operator = e.target.innerText;
-      opeartorContent.innerText = operator;
-      console.log(operator);
       
-      prevNum.innerText = displayContent;
-      displayedNum.innerText = "";
+      opeartor.textContent = e.target.textContent ;
+
+      //console.log(operator);
+      
+      prevNum.textContent = displayContent;
+      displayedNum.textContent = "";
     }
     if (action === "decimal") {
-      if (!displayedNum.innerText.includes(".")) {
-        displayedNum.innerText += ".";
+      if (!displayedNum.textContent.includes(".")) {
+        displayedNum.textContent += ".";
       }
     }
     if (action === "clear-all") {
-      displayedNum.innerText = "";
-      prevNum.innerText = "";
-      opeartorContent.innerText = "";
+      displayedNum.textContent = "";
+      prevNum.textContent = "";
+      opeartor.textContent = "";
     }
     if (action === "calculate") {
-      const currNum = parseFloat(displayedNum.innerText);
-      const prevNumber = parseFloat(prevNum.innerText);
+      const currNum = parseFloat(displayedNum.textContent);
+      const prevNumber = parseFloat(prevNum.textContent);
 
-      if (opeartorContent.innerText.includes("+")) {
+      if (opeartor.textContent ==="+") {
         result = prevNumber + currNum;
         displayResult()
-      } else if (opeartorContent.innerText.includes("-")) {
+      } else if (opeartor.textContent ==="-") {
         result = prevNumber - currNum;
         displayResult()
-      } else if (opeartorContent.innerText.includes("x")) {
+      } else if (opeartor.textContent ==="x") {
         result = prevNumber * currNum;
         displayResult()
-      } else if (opeartorContent.innerText.includes("÷")) {
+      } else if (opeartor.textContent ==="÷") {
         result = prevNumber / currNum;
         displayResult()
       }
@@ -64,7 +65,7 @@ keys.addEventListener("click", e => {
   }
 });
 function displayResult(){
-  displayedNum.innerText = result;
-  prevNum.innerText = "";
-  opeartorContent.innerText = "";
+  displayedNum.textContent = result;
+  prevNum.textContent = "";
+  opeartor.textContent = "";
 }
