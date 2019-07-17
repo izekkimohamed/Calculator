@@ -1,0 +1,79 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  background-image: linear-gradient(to right bottom, #2ecc71, #1abc9c);
+  position: relative;
+}
+.container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: auto;
+  width: 400px;
+  background: rgba(255, 255, 255, 0.75);
+}
+.output {
+  height: 100px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 10px;
+  color: aliceblue;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 1.5rem;
+}
+.numbers {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: ;
+  padding: 0 15px;
+}
+
+.numbers > button {
+  font-size: 1.3rem;
+  font-weight: 300;
+  margin: 15px;
+  height: 50px;
+  width: 50px;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 0.5px solid rgba(255, 255, 255, 0.644);
+  outline: none;
+
+}
+.numbers > button:focus,.numbers > button:active {
+
+    outline: none;
+}
+.number {
+  background: rgba(250, 250, 250, 0.329);
+}
+
+.top {
+  background-color: rgba(0, 0, 0, 0.356);
+}
+.division {
+  background: #3498db;
+}
+.plus {
+  background: #e74c3c;
+}
+.minus {
+  background: #c0392b;
+}
+.equal {
+  background: #8e44ad;
+  
+}
+.multi {
+  background: #1abc9c;
+}
