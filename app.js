@@ -1,23 +1,56 @@
 const calculator = document.querySelector(".container");
 const displayedNum = document.querySelector(".curr-op");
 const prevNum = document.querySelector(".prev-op");
-const opeartor = document.querySelector('.operator')
+const opeartor = document.querySelector(".operator");
 const keys = document.querySelector(".numbers");
-let result;
+let key,action,keyContent,displayContent;
+let result = "";
+function calculate() {
+  const currNum = parseFloat(displayedNum.innerText);
+  const prevNumber = parseFloat(prevNum.innerText);
+
+  if (opeartor.innerText === "+") {
+    result = prevNumber + currNum;
+    displayResult();
+  } else if (opeartor.innerText === "-") {
+    
+      result = prevNumber - currNum;
+    displayResult();
+    
+    
+  } else if (opeartor.innerText === "x") {
+    result = prevNumber * currNum;
+    displayResult();
+  } else if (opeartor.innerText === "÷") {
+    result = prevNumber / currNum;
+    displayResult();
+  }
+}
+function addNum() {
+  if (result === "") {
+    if (displayContent === "0") {
+      displayedNum.innerText = keyContent;
+      parseFloat(displayedNum.innerText).toLocaleString();
+    } else {
+      displayedNum.innerText += keyContent;
+      parseFloat(displayedNum.textContent).toLocaleString();
+    }
+  } else {
+    displayedNum.innerText += keyContent;
+  }
+}
+function displayResult() {
+  displayedNum.innerText = result.toLocaleString();
+}
 
 keys.addEventListener("click", e => {
   if (e.target.matches("button")) {
-    const key = e.target;
-    const action = key.dataset.action;
-    const keyContent = key.textContent;
-    const displayContent = displayedNum.textContent;
-    
+    key = e.target;
+    action = key.dataset.action;
+    keyContent = key.textContent;
+    displayContent = displayedNum.innerText;
     if (!action) {
-      if (displayContent === "0") {
-        displayedNum.textContent = keyContent;
-      } else {
-        displayedNum.textContent += keyContent;
-      }
+      addNum();
     }
     if (
       action === "plus" ||
@@ -26,46 +59,43 @@ keys.addEventListener("click", e => {
       action === "multi" ||
       action === "reminder"
     ) {
-      
-      opeartor.textContent = e.target.textContent ;
-
-      //console.log(operator);
-      
-      prevNum.textContent = displayContent;
-      displayedNum.textContent = "";
+      if(displayedNum.inner === "0" || displayedNum.inner === ""){
+        displayedNum.innerText = '-';
+        opeartor.innerText = '';
+      }
+      if (opeartor.innerText === "") {
+        opeartor.innerText = e.target.innerText;
+        //console.log(opeartor.innerText);
+        prevNum.innerText = displayContent;
+        displayedNum.innerText = "";
+      } else if (opeartor.innerText != "" && displayedNum.innerText === "") {
+        prevNum.innerText = prevNum.innerText;
+        opeartor.innerText = e.target.innerText;
+      } else if (opeartor.innerText != "") {
+        calculate();
+        opeartor.innerText = e.target.innerText;
+        prevNum.innerText = result;
+        displayedNum.textContent = "";
+      }
     }
     if (action === "decimal") {
-      if (!displayedNum.textContent.includes(".")) {
-        displayedNum.textContent += ".";
+      if (!displayedNum.innerText.includes(".")) {
+        displayedNum.innerText += ".";
       }
     }
     if (action === "clear-all") {
-      displayedNum.textContent = "";
-      prevNum.textContent = "";
-      opeartor.textContent = "";
+      displayedNum.innerText = "";
+      prevNum.innerText = "";
+      opeartor.innerText = "";
+    }
+    if (action === "delet") {
+      num = displayContent.substring(0, displayContent.length - 1);
+      displayedNum.innerText = num;
     }
     if (action === "calculate") {
-      const currNum = parseFloat(displayedNum.textContent);
-      const prevNumber = parseFloat(prevNum.textContent);
-
-      if (opeartor.textContent ==="+") {
-        result = prevNumber + currNum;
-        displayResult()
-      } else if (opeartor.textContent ==="-") {
-        result = prevNumber - currNum;
-        displayResult()
-      } else if (opeartor.textContent ==="x") {
-        result = prevNumber * currNum;
-        displayResult()
-      } else if (opeartor.textContent ==="÷") {
-        result = prevNumber / currNum;
-        displayResult()
-      }
+      calculate();
+      prevNum.innerText = "";
+      opeartor.innerText = "";
     }
   }
 });
-function displayResult(){
-  displayedNum.textContent = result;
-  prevNum.textContent = "";
-  opeartor.textContent = "";
-}
